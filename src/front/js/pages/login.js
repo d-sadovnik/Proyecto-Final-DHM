@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import ROUTINENATION from "../../img/ROUTINE NATION 2.png";
 import "../../styles/home.css";
 
-export const Home = () => {
+export const Login = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container-fluid ms-auto">
 			<p>
-				<img src={ROUTINENATION} width={500} height={500} alt="..."/>
 			</p>
 			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
