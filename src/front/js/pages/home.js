@@ -7,10 +7,10 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="container-fluid ms-auto row-3">
-      <p>
+    <div className="container-fluid ms-auto row-3 bg-black">
+      <div className="d-flex justify-content-end">
         <img src={ROUTINENATION} width={1000} height={700} alt="..." />
-      </p>
+      </div>
       <div className="alert alert-info">
         {store.message ||
           "Loading message from the backend (make sure your python backend is running)..."}
