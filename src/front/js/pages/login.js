@@ -1,6 +1,6 @@
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import background from "./img/picfondo2.jpg";
+import background from "../../img/picfondo2.jpg";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
