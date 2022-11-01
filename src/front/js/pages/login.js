@@ -1,7 +1,8 @@
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import "../../styles/signup.css";
 import background from "../../img/picfondo2.jpg";
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -45,25 +46,55 @@ export const Login = () => {
 
   return (
     <>
-      <div style={{ backgroundImage: `url(${background})` }}></div>
-      <div className="text-center mt-5 ">
-        <h1>Login</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleClick}>Login</button>
+      <section
+        className="containersignup"
+        style={{ backgroundImage: `url(${background})` }}
+      >
+        <div className="form login">
+          <div className="form-content">
+            <header>Login</header>
+
+            <form action="#">
+              <div className="field input-field">
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="field input-field">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-link">
+              <a>
+                    <Link class="nav-link">
+                      Forgot your password?
+                    </Link>
+                  </a>
+                  </div>
+              <div className="field button-field">
+                <button onClick={handleClick}>Login</button>
+              </div>
+              <div className="form-link">
+                <span>
+                  Don't have an account yet?{" "}
+                  <a>
+                    <Link class="nav-link" to="/signup">
+                      Signup
+                    </Link>
+                  </a>
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };
