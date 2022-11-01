@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LOGO from "../../img/logo3.png";
 
 export const Navbar = () => {
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          Routine Nation
-        </a>
+        <Link class="navbar-brand" to="/">
+          <img src={LOGO} />
+        </Link>
         <button
           class="navbar-toggler"
           type="button"
@@ -22,29 +23,29 @@ export const Navbar = () => {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
+              <Link class="nav-link" aria-current="page" to="/signup">
                 Signup
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to="/login">
                 Login
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to="/routines">
                 Routines
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to="/tracker">
                 Tracker
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to="/profile">
                 Profile
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
