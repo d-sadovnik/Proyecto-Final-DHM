@@ -1,6 +1,6 @@
 import { Context } from "../store/appContext";
 import "../../styles/signup.css";
-import background from "../../img/picfondo2.jpg";
+import background from "./../../img/picfondo2.jpg";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +13,7 @@ import { useNavigate } from "react-router-dom";
 export const Signup = () => {
   return (
     <>
-      <body>
-        <section className="containersignup forms">
+        <section className="containersignup" style={{backgroundImage: `url(${background})`}}>
           <div className="form login">
             <div className="form-content">
               <header>Signup</header>
@@ -42,14 +41,13 @@ export const Signup = () => {
                 </div>
                 <div className="form-link">
                   <span>
-                    Already have an account? <Link class="nav-link" to="/login">Login</Link>
+                    Already have an account? <a><Link class="nav-link" to="/login">Login</Link></a>
                     </span>
                 </div>
               </form>
             </div>
           </div>
         </section>
-      </body>
     </>
   );
 };
