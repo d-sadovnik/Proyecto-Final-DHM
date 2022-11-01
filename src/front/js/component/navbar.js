@@ -23,7 +23,7 @@ export const Navbar = () => {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <Link class="nav-link active" aria-current="page" to="/signup">
+              <Link class="nav-link" aria-current="page" to="/signup">
                 Signup
               </Link>
             </li>
