@@ -1,4 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+import os
+import sys
+from sqlalchemy import Column, ForeignKey, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine
 
 db = SQLAlchemy()
 
@@ -90,4 +96,57 @@ class Rutina_del_dia(db.Model):
     rutinalibreid = db.Column(db.Integer, primary_key=True)
 
     def __repr__(self):
-        return f'<Rutina del dia {'
+        return f'<Rutina del dia {self.rutinapredeterminadaid if self.rutinalibreid == None else self.rutinalibreid}'
+
+    def serialize(self):
+        return {
+            "rutinadeldiaid": self.rutinadeldiaid,
+            "userid": self.userid,
+            "rutinapredeterminadaid": self.rutinapredeterminadaid.
+            "rutinalibreid": self.rutinalibreid,
+        }
+
+class rutina_predeterminada(db.Model):
+    rutinapredeterminadaid= db.Column(db.Integer, primary_key=True)
+    nombrerutina= db.Column(db.String(120), nullable=False)
+
+    def __repr__(self):
+        return f'<Rutina predetermiada {self.nombrerutina}'
+    
+    def serialize(self):
+        return {
+            "rutinapredeterminadaid": self.rutinapredeterminadaid,
+            "nombrerutina": self.rutinapredeterminadaid,
+        }
+
+class Tracker(db.Model):
+    trackerid =  db.Column(db.Integer, primary_key=True)
+    userID = db.Column(db.Integer, primary_key=True)
+    rutina_del_dia = db.Column(db.Integer, primary_key=True)
+    calorias_quemadas = db.Column(db.Float,nullable=False)
+    distancia_recorrida = db.Column(db.Float,nullable=False)
+    pasos_diarios = db.Column(db.Float,nullable=False)
+
+    def __repr__(self):
+        return f'<Tracker {self.distancia_recorrida} km'
+    
+    def serialize(self):
+        return {
+            "trackerid":self.trackerid,
+            "calorias_quemadas":self.calorias_quemadas,
+            "distancia_recorrida":self.distancia_recorrida,
+            "pasos_diarios":self.pasos_diarios,
+        }
+
+class Profile(db.Model):
+    profileid = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.Integer, primary_key=True)
+    edad = db.Column(db.Integer, nullable=False)
+    altura = db.Column(db.Integer, nullable=False)
+    peso = db.Column(db.Integer, nullable=False)
+    masa_muscular = db.Column(db.Integer, nullable=False)
+    grasa_corporal = db.Column(db.Integer, nullable=False)
+
+
+
+
