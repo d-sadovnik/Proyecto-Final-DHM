@@ -1,6 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 import os
 import sys
+import sqlalchemy
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -102,7 +102,7 @@ class Rutina_del_dia(db.Model):
         return {
             "rutinadeldiaid": self.rutinadeldiaid,
             "userid": self.userid,
-            "rutinapredeterminadaid": self.rutinapredeterminadaid.
+            "rutinapredeterminadaid": self.rutinapredeterminadaid,
             "rutinalibreid": self.rutinalibreid,
         }
 
@@ -146,6 +146,20 @@ class Profile(db.Model):
     peso = db.Column(db.Integer, nullable=False)
     masa_muscular = db.Column(db.Integer, nullable=False)
     grasa_corporal = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f'<Profile {self.userid}'
+
+    def serialize(self):
+        return {
+            "profileid":self.profileid,
+            "edad":self.edad,
+            "altura":self.altura,
+            "peso":self.peso,
+            "masa_muscular":self.masa_muscular,
+            "grasa_corporal":self.grasa_corporal,
+        }
+
 
 
 
