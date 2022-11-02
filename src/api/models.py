@@ -74,7 +74,7 @@ class Grupo_muscular(db.Model):
             "grupo_nombre": self.grupo_nombre,
         }
 
-class Rutina_libre(db.Model):
+class c(db.Model):
     rutinalibreid = db.Column(db.Integer, primary_key=True)
     musculoid = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(120), nullable=False)
