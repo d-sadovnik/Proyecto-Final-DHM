@@ -9,6 +9,7 @@ from sqlalchemy import create_engine
 db = SQLAlchemy()
 
 class User(db.Model):
+    __tablename__= "t_user"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -29,7 +30,7 @@ class User(db.Model):
 
 class Ejercicios(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    musculoid = db.Column(db.Integer)
+    musculoid = db.Column(db.Integer, db.ForeignKey("t_musculos.musculoid"))
     name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(120), nullable=False)
     
@@ -45,6 +46,7 @@ class Ejercicios(db.Model):
         }
 
 class Musculos(db.Model):
+    __tablename__= "t_musculos"
     musculoid = db.Column(db.Integer,primary_key=True)
     grupomuscularid = db.Column(db.Integer,primary_key=True)
     musculo = db.Column(db.String(120), nullable=False)
@@ -59,9 +61,10 @@ class Musculos(db.Model):
             "musculo": self.musculo,
         }
 
-class Grupo_muscular(db.Model):
+class GrupoMuscular(db.Model):
+    __tablename__= "t_grupo_muscular"
     grupomuscularid = db.Column(db.Integer,primary_key=True)
-    rutinapredeterminadaid = db.Column(db.Integer,primary_key=True)
+    rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutina_predeterminada.rutinapredeterminadaid"))
     grupo_nombre = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
@@ -74,9 +77,10 @@ class Grupo_muscular(db.Model):
             "grupo_nombre": self.grupo_nombre,
         }
 
-class c(db.Model):
+class RutinaLibre(db.Model):
+    __tablename__= "t_rutina_libre"
     rutinalibreid = db.Column(db.Integer, primary_key=True)
-    musculoid = db.Column(db.Integer,primary_key=True)
+    musculoid = db.Column(db.Integer, db.ForeignKey("t_musculos.musculoid"))
     name = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
@@ -90,10 +94,11 @@ class c(db.Model):
         }
 
 class Rutina_del_dia(db.Model):
+    __tablename__= "t_rutina_del_dia"
     rutinadeldiaid =  db.Column(db.Integer, primary_key=True)
-    userid = db.Column(db.Integer, primary_key=True)
-    rutinapredeterminadaid = db.Column(db.Integer,primary_key=True)
-    rutinalibreid = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.Integer, db.ForeignKey("t_user.id"))
+    rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutinapredeterminada.rutinapredeterminadaid"))
+    rutinalibreid = db.Column(db.Integer, db.ForeignKey("t_rutina_libre.rutinalibreid") )
 
     def __repr__(self):
         return f'<Rutina del dia {self.rutinapredeterminadaid if self.rutinalibreid == None else self.rutinalibreid}'
@@ -106,7 +111,8 @@ class Rutina_del_dia(db.Model):
             "rutinalibreid": self.rutinalibreid,
         }
 
-class rutina_predeterminada(db.Model):
+class RutinaPredeterminada(db.Model):
+    __tablename__= "t_rutina_predeterminada"
     rutinapredeterminadaid= db.Column(db.Integer, primary_key=True)
     nombrerutina= db.Column(db.String(120), nullable=False)
 
@@ -120,6 +126,7 @@ class rutina_predeterminada(db.Model):
         }
 
 class Tracker(db.Model):
+    __tablename__= "t_tracker"
     trackerid =  db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, primary_key=True)
     rutina_del_dia = db.Column(db.Integer, primary_key=True)
@@ -139,6 +146,7 @@ class Tracker(db.Model):
         }
 
 class Profile(db.Model):
+    __tablename__= "t_profile"
     profileid = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.Integer, primary_key=True)
     edad = db.Column(db.Integer, nullable=False)
