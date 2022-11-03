@@ -23,8 +23,8 @@ class User(db.Model):
         }
 
 class Ejercicios(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    musculoid = db.Column(db.Integer, db.ForeignKey("t_musculos.musculoid"))
+    __tablename__="t_ejercicios"
+    ejercicioid = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(120), nullable=False)
     
@@ -41,9 +41,8 @@ class Ejercicios(db.Model):
 
 class Musculos(db.Model):
     __tablename__= "t_musculos"
-    musculoid = db.Column(db.Integer,primary_key=True)
-    grupomuscularid = db.Column(db.Integer,primary_key=True)
-    musculo = db.Column(db.String(120), nullable=False)
+    musculoid = db.Column(db.Integer, primary_key=True)
+    musculo = db.Column(db.String(120), unique=True ,nullable=False)
 
     def __repr__(self):
         return f'<Musculo {self.musculo}'
@@ -51,14 +50,14 @@ class Musculos(db.Model):
     def serialize(self):
         return { 
             "id": self.musculoid,
-            "id_grupo_muscular": self.grupomuscularid,
+            #"id_grupo_muscular": self.grupomuscularid,
             "musculo": self.musculo,
         }
 
 class GrupoMuscular(db.Model):
     __tablename__= "t_grupo_muscular"
     grupomuscularid = db.Column(db.Integer,primary_key=True)
-    rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutina_predeterminada.rutinapredeterminadaid"))
+    #""" rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutina_predeterminada.rutinapredeterminadaid")) """
     grupo_nombre = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
@@ -74,8 +73,8 @@ class GrupoMuscular(db.Model):
 class RutinaLibre(db.Model):
     __tablename__= "t_rutina_libre"
     rutinalibreid = db.Column(db.Integer, primary_key=True)
-    musculoid = db.Column(db.Integer, db.ForeignKey("t_musculos.musculoid"))
     name = db.Column(db.String(120), nullable=False)
+    #""" rutinadeldiaid = db.relationship("t_rutina_del_dia", back_populates="rutinalibre", uselist=False) """
 
     def __repr__(self):
         return f'< Rutina Libre {self.name}'
@@ -91,11 +90,11 @@ class Rutina_del_dia(db.Model):
     __tablename__= "t_rutina_del_dia"
     rutinadeldiaid =  db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.Integer, db.ForeignKey("t_user.id"))
-    rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutinapredeterminada.rutinapredeterminadaid"))
-    rutinalibreid = db.Column(db.Integer, db.ForeignKey("t_rutina_libre.rutinalibreid") )
+    #"""rutinapredeterminadaid = db.Column(db.Integer, db.ForeignKey("t_rutina_predeterminada.rutinapredeterminadaid"), nullable=True)
+    #rutinalibreid = db.Column(db.Integer, db.ForeignKey("t_rutina_libre.rutinalibreid"), nullable=True)
 
     def __repr__(self):
-        return f'<Rutina del dia {self.rutinapredeterminadaid if self.rutinalibreid == None else self.rutinalibreid}'
+        return f'<Rutina del dia {self.rutinadeldiaid}'
 
     def serialize(self):
         return {
@@ -108,7 +107,9 @@ class Rutina_del_dia(db.Model):
 class RutinaPredeterminada(db.Model):
     __tablename__= "t_rutina_predeterminada"
     rutinapredeterminadaid= db.Column(db.Integer, primary_key=True)
+    #""" rutinadeldiaid = db.Column(db.Integer, db.ForeignKey("t_rutina_del_dia.rutinadeldiaid")) """
     nombrerutina= db.Column(db.String(120), nullable=False)
+    #""" rutinadeldia = db.relationship("t_rutina_del_dia", back_populates="t_rutina_predeterminada", uselist=False) """
 
     def __repr__(self):
         return f'<Rutina predetermiada {self.nombrerutina}'
@@ -122,11 +123,11 @@ class RutinaPredeterminada(db.Model):
 class Tracker(db.Model):
     __tablename__= "t_tracker"
     trackerid =  db.Column(db.Integer, primary_key=True)
-    userID = db.Column(db.Integer, primary_key=True)
-    rutina_del_dia = db.Column(db.Integer, primary_key=True)
-    calorias_quemadas = db.Column(db.Float,nullable=False)
-    distancia_recorrida = db.Column(db.Float,nullable=False)
-    pasos_diarios = db.Column(db.Float,nullable=False)
+    #""" userID = db.Column(db.Integer, primary_key=True)
+    #rutina_del_dia = db.Column(db.Integer, primary_key=True)
+    #calorias_quemadas = db.Column(db.Float,nullable=False)
+    #distancia_recorrida = db.Column(db.Float,nullable=False)
+    #pasos_diarios = db.Column(db.Float,nullable=False) """
 
     def __repr__(self):
         return f'<Tracker {self.distancia_recorrida} km'
@@ -142,7 +143,7 @@ class Tracker(db.Model):
 class Profile(db.Model):
     __tablename__= "t_profile"
     profileid = db.Column(db.Integer, primary_key=True)
-    userid = db.Column(db.Integer, primary_key=True)
+    #userid = db.Column(db.Integer, primary_key=True)
     edad = db.Column(db.Integer, nullable=False)
     altura = db.Column(db.Integer, nullable=False)
     peso = db.Column(db.Integer, nullable=False)
