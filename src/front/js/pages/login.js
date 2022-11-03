@@ -1,6 +1,6 @@
 import { Context } from "../store/appContext";
 import "../../styles/signup.css";
-import background from "../../img/picfondo2.jpg";
+import background from "../../img/login-image.jpg";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
