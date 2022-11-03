@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(69, 65, 65);
+  background-size: 100%;
 }
 
 .form {
@@ -23,7 +24,7 @@
   padding: 30px;
   border-radius: 6px;
   background-color:#FFF;
-  opacity: 90%;
+  opacity: 85%;
 }
 
 header {
