@@ -14,8 +14,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.goldsgym.com%2Flosangelesdtca%2F&psig=AOvVaw33A6SoKIU6bGdI7kKCK2KE&ust=1667350232667000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCPDZouHhi_sCFQAAAAAdAAAAABAY") !important; */
   background-color: rgb(69, 65, 65);
+  background-size: 100% 100%;
 }
 
 .form {

@@ -7,9 +7,16 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="container-fluid ms-auto row-3 bg-black">
-      <div className="d-flex justify-content-end">
-        <img src={ROUTINENATION} width={1000} height={700} alt="..." />
+    <div className="container-fluid bg-dark">
+    <div className="row">
+      <div className="col">
+        <header>ROUTINE NATION</header>
+        <a>
+          We are a solution to your daily workout routine
+        </a>
+      </div>
+      <div className="col">
+        <img src={ROUTINENATION} width={700} height={700} alt="..." />
       </div>
       <div className="alert alert-info">
         {store.message ||
@@ -21,6 +28,7 @@ export const Home = () => {
           Read documentation
         </a>
       </p>
+    </div>
     </div>
   );
 };
